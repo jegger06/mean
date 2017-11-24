@@ -1,0 +1,64 @@
+<h2 class="display-4">Register</h2>
+<form #f="ngForm" (ngSubmit)="onRegisterSubmit(f)">
+
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" [(ngModel)]="name" name="name" id="name" class="form-control" minlength="4" placeholder="Your Name..." #nameField="ngModel" required>
+
+    <div *ngIf="nameField.invalid && (nameField.dirty || nameField.touched)" class="alert alert-danger">
+      <div *ngIf="nameField.errors.required">
+        <small>Name is required</small>
+      </div>
+      <div *ngIf="nameField.errors.minlength">
+        <small>Name must be at least {{ nameField.errors.minlength.requiredLength }} characters long.</small>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input type="text" [(ngModel)]="username" name="username" id="username" class="form-control" minlength="3" placeholder="Your Username..." #usernameField="ngModel" required>
+
+    <div *ngIf="usernameField.invalid && (usernameField.dirty || usernameField.touched)" class="alert alert-danger">
+      <div *ngIf="usernameField.errors.required">
+        <small>Username is required</small>
+      </div>
+      <div *ngIf="usernameField.errors.minlength">
+        <small>Username must be at least {{ usernameField.errors.minlength.requiredLength }} characters long.</small>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" [(ngModel)]="email" name="email" id="email" class="form-control" placeholder="Your Email..." email #emailField="ngModel" required>
+
+    <div *ngIf="emailField.invalid && (emailField.dirty || emailField.touched)" class="alert alert-danger">
+      <div *ngIf="emailField.errors.required">
+        <small>Email is required</small>
+      </div>
+      <div *ngIf="emailField.errors.email && !emailField.errors.required">
+        <small>Email is not valid</small>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" [(ngModel)]="password" name="password" minlength="5" id="password" class="form-control" placeholder="Your Password..." #passwordField="ngModel" required>
+
+    <div *ngIf="passwordField.invalid && (passwordField.dirty || passwordField.touched)" class="alert alert-danger">
+      <div *ngIf="passwordField.errors.required">
+        <small>Password is required</small>
+      </div>
+      <div *ngIf="passwordField.errors.minlength">
+        <small>Password must be at least {{ passwordField.errors.minlength.requiredLength }} characters long.</small>
+      </div>
+    </div>
+
+  </div>
+  <button [disabled]="!f.valid" type="submit" class="btn btn-primary">Submit</button>
+</form>
