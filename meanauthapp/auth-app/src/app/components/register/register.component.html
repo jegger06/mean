@@ -60,5 +60,7 @@
     </div>
 
   </div>
-  <button [disabled]="!f.valid" type="submit" class="btn btn-primary">Submit</button>
+
+  <button [disabled]="f.invalid" type="submit" class="btn btn-primary">Submit</button>
+
 </form>

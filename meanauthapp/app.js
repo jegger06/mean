@@ -5,8 +5,6 @@ const cors = require('cors');
 const passport = require('passport');
 const mongoose = require('mongoose');
 
-const User = require('./models/User'); // Delete this
-
 // Load keys
 const keys = require('./config/keys');
 
@@ -45,10 +43,11 @@ app.use('/users', users);
 
 // Index Route
 app.get('/', (req, res) => {
-  User.find({}).then((users) => {
-    res.json({ users: users });
-  });
-  // res.send('Invalid Endpoint'); // Uncomment this later and remove the query above this.
+  res.send('Invalid Endpoint');
+});
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/index.html'));
 });
 
 const port = process.env.PORT || 3000;
