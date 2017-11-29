@@ -1,3 +1,77 @@
-<p>
-  register works!
-</p>
+<h2 class="display-3 mb-4">Register</h2>
+<form #registerForm="ngForm" (ngSubmit)="onRegister(registerForm)" novalidate>
+
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input type="text" [(ngModel)]="user.username" name="username" #usernameField="ngModel" minlength="3" class="form-control" id="username" placeholder="Enter your username" [ngClass]="{'is-invalid' : usernameField.invalid && (usernameField.dirty || usernameField.touched)}" required>
+
+    <div *ngIf="usernameField.invalid && (usernameField.dirty || usernameField.touched)" class="invalid-feedback">
+      <div *ngIf="usernameField.errors.required">
+        Username is required.
+      </div>
+      <div *ngIf="usernameField.errors.minlength">
+        Username must be atleast {{ usernameField.errors.minlength.requiredLength }} characters long.
+      </div>
+    </div>
+
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" email [(ngModel)]="user.email" name="email" #emailField="ngModel" class="form-control"
+      id="email" placeholder="Enter your email" [ngClass]="{'is-invalid' : emailField.invalid && (emailField.dirty || emailField.touched)}"
+      required>
+  
+    <div *ngIf="emailField.invalid && (emailField.dirty || emailField.touched)" class="invalid-feedback">
+      <div *ngIf="emailField.errors.required">
+        Email is required.
+      </div>
+      <div *ngIf="emailField.errors.email && !emailField.errors.required">
+        Email is not valid
+      </div>
+    </div>
+  
+  </div>
+
+  <div class="form-group">
+    <label for="firstname">First name</label>
+    <input type="text" [(ngModel)]="user.firstname" name="firstname" #firstnameField="ngModel" class="form-control" id="firstname" placeholder="Enter your first name" [ngClass]="{'is-invalid' : firstnameField.invalid && (firstnameField.dirty || firstnameField.touched)}" required>
+
+    <div *ngIf="firstnameField.invalid && (firstnameField.dirty || firstnameField.touched)" class="invalid-feedback">
+      <div *ngIf="firstnameField.errors.required">
+        First name is required
+      </div>
+    </div>
+
+  </div>
+
+  <div class="form-group">
+    <label for="lastname">Last name</label>
+    <input type="text" [(ngModel)]="user.lastname" name="lastname" #lastnameField="ngModel" class="form-control" id="lastname" placeholder="Enter your last name" [ngClass]="{'is-invalid' : lastnameField.invalid && (lastnameField.dirty || lastnameField.touched)}" required>
+
+    <div *ngIf="lastnameField.invalid && (lastnameField.dirty || lastnameField.touched)" class="invalid-feedback">
+      <div *ngIf="lastnameField.errors.required">
+        Last name is required
+      </div>
+    </div>
+
+  </div>
+
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" [(ngModel)]="user.password" name="password" #passwordField="ngModel" minlength="5" class="form-control" id="password" placeholder="Enter your password" [ngClass]="{'is-invalid' : passwordField.invalid && (passwordField.dirty || passwordField.touched)}" required>
+
+    <div *ngIf="passwordField.invalid && (passwordField.dirty || passwordField.touched)" class="invalid-feedback">
+      <div *ngIf="passwordField.errors.required">
+        Password is required
+      </div>
+      <div *ngIf="passwordField.errors.minlength">
+        Password must be atleast {{ passwordField.errors.minlength.requiredLength }} characters long.
+      </div>
+    </div>
+
+  </div>
+
+  <button [disabled]="!registerForm.form.valid" type="submit" class="btn btn-primary">Submit</button>
+
+</form>
