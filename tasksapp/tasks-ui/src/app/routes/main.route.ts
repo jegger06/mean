@@ -11,6 +11,9 @@ import { ProfileComponent } from '../components/profile/profile.component';
 import { ViewProfileComponent } from '../components/profile/view-profile/view-profile.component';
 import { EditProfileComponent } from '../components/profile/edit-profile/edit-profile.component';
 
+import { AuthGuard } from './../guards/auth.guard';
+import { AnonymousGuard } from './../guards/anonymous.guard';
+
 export const appRoutes: Routes = [
   {
     path: '',
@@ -18,15 +21,18 @@ export const appRoutes: Routes = [
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [AnonymousGuard]
   },
   {
     path: 'register',
-    component: RegisterComponent
+    component: RegisterComponent,
+    canActivate: [AnonymousGuard]
   },
   {
     path: 'task',
     component: TasksComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
@@ -35,21 +41,25 @@ export const appRoutes: Routes = [
       },
       {
         path: 'all',
-        component: TasksListComponent
+        component: TasksListComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'add',
-        component: AddTaskComponent
+        component: AddTaskComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'edit/:id',
-        component: EditTaskComponent
+        component: EditTaskComponent,
+        canActivate: [AuthGuard]
       }
     ]
   },
   {
     path: 'profile',
     component: ProfileComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
@@ -58,11 +68,13 @@ export const appRoutes: Routes = [
       },
       {
         path: 'view',
-        component: ViewProfileComponent
+        component: ViewProfileComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'edit',
-        component: EditProfileComponent
+        component: EditProfileComponent,
+        canActivate: [AuthGuard]
       }
     ]
   },

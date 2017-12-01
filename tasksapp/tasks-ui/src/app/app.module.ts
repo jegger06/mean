@@ -23,6 +23,8 @@ import { EditProfileComponent } from './components/profile/edit-profile/edit-pro
 import { appRoutes } from './routes/main.route';
 
 import { AuthService } from './services/auth.service';
+import { AuthGuard } from './guards/auth.guard';
+import { AnonymousGuard } from './guards/anonymous.guard';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,7 @@ import { AuthService } from './services/auth.service';
     ToastModule.forRoot(),
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [{ provide: ToastOptions, useClass: CustomOption}, AuthService],
+  providers: [{ provide: ToastOptions, useClass: CustomOption }, AuthService, AuthGuard, AnonymousGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

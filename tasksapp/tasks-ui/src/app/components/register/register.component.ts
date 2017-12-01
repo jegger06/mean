@@ -39,8 +39,8 @@ export class RegisterComponent implements OnInit {
       };
       this.authService.registerUser(user).subscribe((res) => {
         if (res.success) {
-          this.toastr.success(res.msg, 'Success!');
-          this.router.navigate(['/login']);
+          localStorage.setItem('status', 'registered');
+          window.location.href = '/login';
         } else {
           this.toastr.error(res.msg, 'Oops!');
         }

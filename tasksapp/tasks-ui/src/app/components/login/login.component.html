@@ -1,3 +1,46 @@
-<p>
-  login works!
-</p>
+<h2 class="display-3">Login</h2>
+<div class="row mt-4">
+  <div class="col-md-6 mx-auto">
+    <div class="card">
+      <div class="mx-auto pt-4" style="width:7rem">
+        <img src="/assets/img/logo.png"  class="card-img-top" alt="">
+      </div>
+      <div class="card-body">
+        <form #loginForm="ngForm" (ngSubmit)="onLogin(loginForm)" novalidate>
+
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input [(ngModel)]="user.username" type="text" name="username" id="username" class="form-control" placeholder="Your Username..." #usernameField="ngModel" [ngClass]="{'is-invalid' : usernameField.invalid && (usernameField.dirty || usernameField.touched)}" minlength="3" required>
+
+            <div *ngIf="usernameField.invalid && (usernameField.dirty || usernameField.touched)" class="invalid-feedback">
+              <div *ngIf="usernameField.errors.required">
+                Username is required.
+              </div>
+              <div *ngIf="usernameField.errors.minlength">
+                Username must be atleast {{ usernameField.errors.minlength.requiredLength }} characters long.
+              </div>
+            </div>
+
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input [(ngModel)]="user.password" type="password" name="password" id="password" class="form-control" placeholder="Your Password..." #passwordField="ngModel" [ngClass]="{'is-invalid' : passwordField.invalid && (passwordField.dirty || passwordField.touched)}" required>
+
+            <div *ngIf="passwordField.invalid && (passwordField.dirty || passwordField.touched)" class="invalid-feedback">
+              <div *ngIf="passwordField.errors.required">
+                Password is required
+              </div>
+            </div>
+
+          </div>
+
+          <button [disabled]="!loginForm.form.valid" type="submit" class="btn btn-block btn-primary">Submit</button>
+          <p class="text-right">
+            <a href="#" routerLink="/forgot-password" class="btn btn-link">Forgot Your Password?</a>
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
