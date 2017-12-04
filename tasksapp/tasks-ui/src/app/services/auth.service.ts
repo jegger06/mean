@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Register, Login } from '../models/response.interface';
 import { tokenNotExpired } from 'angular2-jwt';
 
@@ -11,17 +11,11 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   registerUser(user) {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.http.post<Register>('http://localhost:3000/api/user/register', user, {
-      headers: headers
-    });
+    return this.http.post<Register>('http://localhost:3000/api/user/register', user);
   }
 
   loginUser(user) {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.http.post<Login>('http://localhost:3000/api/user/authenticate', user, {
-      headers: headers
-    });
+    return this.http.post<Login>('http://localhost:3000/api/user/authenticate', user);
   }
 
   storeUserData(token, user) {
@@ -41,7 +35,5 @@ export class AuthService {
     this.user = null;
     localStorage.clear();
   }
-
-
 
 }

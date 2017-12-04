@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ToastModule, ToastOptions } from 'ng2-toastr/ng2-toastr';
@@ -25,6 +25,8 @@ import { appRoutes } from './routes/main.route';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './guards/auth.guard';
 import { AnonymousGuard } from './guards/anonymous.guard';
+
+import { InterceptorService } from './services/interceptor.service';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,20 @@ import { AnonymousGuard } from './guards/anonymous.guard';
     ToastModule.forRoot(),
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [{ provide: ToastOptions, useClass: CustomOption }, AuthService, AuthGuard, AnonymousGuard],
+  providers: [
+    {
+      provide: ToastOptions,
+      useClass: CustomOption
+    },
+    AuthService,
+    AuthGuard,
+    AnonymousGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
