@@ -1,3 +1,7 @@
-<p>
-  tasks-list works!
-</p>
+<h2 class="display-3 mb-4">Tasks Lists</h2>
+<div *ngIf="tasks.length !== 0; else noTasks">
+
+</div>
+<ng-template #noTasks>
+  <p class="text-center">There are no current tasks.</p>
+</ng-template>
