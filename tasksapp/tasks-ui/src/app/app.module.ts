@@ -28,6 +28,8 @@ import { AnonymousGuard } from './guards/anonymous.guard';
 
 import { InterceptorService } from './services/interceptor.service';
 
+import { Daterangepicker } from 'ng2-daterangepicker';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,6 +50,7 @@ import { InterceptorService } from './services/interceptor.service';
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
+    Daterangepicker,
     ToastModule.forRoot(),
     RouterModule.forRoot(appRoutes)
   ],

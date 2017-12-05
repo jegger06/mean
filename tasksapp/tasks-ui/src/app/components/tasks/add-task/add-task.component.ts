@@ -13,7 +13,24 @@ export class AddTaskComponent implements OnInit {
     endDate: '',
     details: ''
   };
-  startDateErr: any = '';
+  daterangeInput: any;
+
+  daterange: any = {};
+
+  options: any = {
+    minDate: new Date().toISOString(),
+    locale: {
+      format: 'YYYY-MM-DD'
+    },
+    alwaysShowCalendars: false
+  };
+
+  selectedDate(value: any, daterange?: any) {
+    daterange.start = value.start;
+    daterange.end = value.end;
+    this.task.startDate = daterange.start.format().split('T')[0];
+    this.task.endDate = daterange.end.format().split('T')[0];
+  }
 
   constructor() { }
 
@@ -21,8 +38,8 @@ export class AddTaskComponent implements OnInit {
   }
 
   addTask(f) {
-
-    console.log(new Date(f.value.startDate).toISOString() <= new Date(f.value.endDate).toISOString());
+    console.log(f);
   }
+
 
 }
