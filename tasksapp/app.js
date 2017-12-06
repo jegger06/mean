@@ -10,6 +10,7 @@ const keys = require('./config/keys');
 
 // Load Routes
 const users = require('./routes/user.route');
+const tasks = require('./routes/task.route');
 
 // Set mongoose Promise to global Promise
 mongoose.Promise = global.Promise;
@@ -40,6 +41,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Use Routes
 app.use('/api/user', users);
+app.use('/api/task/', tasks);
 
 const port = process.env.PORT || 3000;
 

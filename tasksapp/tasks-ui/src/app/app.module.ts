@@ -30,6 +30,8 @@ import { InterceptorService } from './services/interceptor.service';
 
 import { Daterangepicker } from 'ng2-daterangepicker';
 
+import { TaskService } from './services/task.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,7 +68,8 @@ import { Daterangepicker } from 'ng2-daterangepicker';
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,
       multi: true
-    }
+    },
+    TaskService
   ],
   bootstrap: [AppComponent]
 })

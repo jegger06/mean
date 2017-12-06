@@ -16,14 +16,27 @@
 
   </div>
 
-  <div class="form-group">
+  <div class="form-group" daterangepicker [options]="options" (selected)="selectedDate($event, daterange)">
     <label for="daterange">Task Date</label>
-    <input type="text" [(ngModel)]="daterangeInput" (change)="daterangeInput" class="form-control" name="daterangeInput" daterangepicker [options]="options" (selected)="selectedDate($event, daterange)" #daterangeInputField="ngModel" required>
+    <input type="text" placeholder="Task Dates" class="form-control" [(ngModel)]="dateSelected" name="dateSelected" #dateSelectedField="ngModel" [ngClass]="{'is-invalid' : dateSelectedField.invalid && (dateSelectedField.dirty || dateSelectedField.touched)}" [readonly]="taskDate" required>
+
+    <div *ngIf="dateSelectedField.invalid && (dateSelectedField.dirty || dateSelectedField.touched)" class="invalid-feedback">
+      <div *ngIf="dateSelectedField.errors.required">
+        Task Date is required
+      </div>
+    </div>
   </div>
 
   <div class="form-group">
     <label for="details">Details</label>
-    <textarea [(ngModel)]="task.details" name="details" id="details" cols="4" rows="5" class="form-control" required></textarea>
+    <textarea [(ngModel)]="task.details" name="details" id="details" cols="4" rows="5" class="form-control" #detailsField="ngModel" [ngClass]="{'is-invalid' : detailsField.invalid && (detailsField.dirty || detailsField.touched)}" required></textarea>
+
+    <div *ngIf="detailsField.invalid && (detailsField.dirty || detailsField.touched)" class="invalid-feedback">
+      <div *ngIf="detailsField.errors.required">
+        Task Details is required
+      </div>
+    </div>
+
   </div>
   <button [disabled]="!taskForm.form.valid" type="submit" class="btn btn-primary">Submit</button>
 </form>
