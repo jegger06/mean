@@ -1,7 +1,79 @@
 <h2 class="display-3 mb-4">Tasks Lists</h2>
-<div *ngIf="tasks.length !== 0; else noTasks">
+<div *ngIf="errorMsg != ''; else error">
+  <ul class="nav nav-tabs justify-content-center mb-4" id="myTab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" id="todaysTask-tab" data-toggle="tab" href="#todaysTask" role="tab" aria-controls="todaysTask" aria-selected="true">Today's Task</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="latestTask-tab" data-toggle="tab" href="#latestTask" role="tab" aria-controls="latestTask" aria-selected="false">Latest Task</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="overdueTask-tab" data-toggle="tab" href="#overdueTask" role="tab" aria-controls="overdueTask" aria-selected="false">Overdue Task</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="doneTask-tab" data-toggle="tab" href="#doneTask" role="tab" aria-controls="doneTask" aria-selected="false">Done Task</a>
+    </li>
+  </ul>
+  <div class="tab-content">
 
+    <div class="tab-pane fade show active" id="todaysTask" role="tabpanel" aria-labelledby="todaysTask-tab">
+      <div class="card mb-4">
+        <h3 class="card-header">Today's Task</h3>
+        <ul *ngIf="todaysTask.length > 0; else noTodaysTask" class="list-group list-group-flush">
+          <li *ngFor="let task of todaysTask" class="list-group-item">{{ task.name }}</li>
+        </ul>
+        <ng-template #noTodaysTask>
+          <div class="card-body">
+            <p class="text-center">No Today's Task</p>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+
+    <div class="tab-pane fade" id="latestTask" role="tabpanel" aria-labelledby="latestTask-tab">
+      <div class="card mb-4">
+        <h3 class="card-header">Latest Task</h3>
+        <ul *ngIf="latestTask.length > 0; else noLatestTask" class="list-group list-group-flush">
+          <li *ngFor="let task of latestTask" class="list-group-item">{{ task.name }}</li>
+        </ul>
+        <ng-template #noLatestTask>
+          <div class="card-body">
+            <p class="text-center">No Latest Task</p>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+
+    <div class="tab-pane fade" id="overdueTask" role="tabpanel" aria-labelledby="overdueTask-tab">
+      <div class="card mb-4">
+        <h3 class="card-header">Overdue Task</h3>
+        <ul *ngIf="overdueTask.length > 0; else noOverDueTask" class="list-group list-group-flush">
+          <li *ngFor="let task of overdueTask" class="list-group-item">{{ task.name }}</li>
+        </ul>
+        <ng-template #noOverDueTask>
+          <div class="card-body">
+            <p class="text-center">No Overdue Task</p>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+
+    <div class="tab-pane fade" id="doneTask" role="tabpanel" aria-labelledby="doneTask-tab">
+      <div class="card mb-4">
+        <h3 class="card-header">Done Task</h3>
+        <ul *ngIf="doneTask.length > 0; else noDoneTask" class="list-group list-group-flush">
+          <li *ngFor="let task of doneTask" class="list-group-item">{{ task.name }}</li>
+        </ul>
+        <ng-template #noDoneTask>
+          <div class="card-body">
+            <p class="text-center">No Done Task</p>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
 </div>
-<ng-template #noTasks>
-  <p class="text-center">There are no current tasks.</p>
+
+<ng-template #error>
+  <p class="text-center">{{ errorMsg }}</p>
 </ng-template>

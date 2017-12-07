@@ -12,3 +12,12 @@ export interface AddTask {
     createdDate: Date
   };
 }
+
+export interface AllTask {
+  success: boolean;
+  msg: string;
+  todaysTask?: [any];
+  latestTask?: [any];
+  overdueTask?: [any];
+  doneTask?: [any];
+}
