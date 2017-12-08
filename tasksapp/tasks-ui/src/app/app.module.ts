@@ -20,6 +20,8 @@ import { EditTaskComponent } from './components/tasks/edit-task/edit-task.compon
 import { ProfileComponent } from './components/profile/profile.component';
 import { ViewProfileComponent } from './components/profile/view-profile/view-profile.component';
 import { EditProfileComponent } from './components/profile/edit-profile/edit-profile.component';
+import { ViewTaskComponent } from './components/tasks/view-task/view-task.component';
+
 import { appRoutes } from './routes/main.route';
 
 import { AuthService } from './services/auth.service';
@@ -45,7 +47,8 @@ import { TaskService } from './services/task.service';
     EditTaskComponent,
     ProfileComponent,
     ViewProfileComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    ViewTaskComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TaskService } from '../../../services/task.service';
 import { TaskList } from '../../../models/task';
 
@@ -7,7 +7,9 @@ import { TaskList } from '../../../models/task';
   templateUrl: './tasks-list.component.html',
   styleUrls: ['./tasks-list.component.css']
 })
-export class TasksListComponent implements OnInit {
+export class TasksListComponent implements OnInit, OnDestroy {
+  private subscription: any = {};
+
   success: boolean;
   errorMsg: any;
   todaysTask: Array<TaskList> = [];
@@ -20,8 +22,8 @@ export class TasksListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.taskService.getAllTask().subscribe((data) => {
-      this.success = data.success;
+    this.subscription = this.taskService.getAllTask().subscribe((data) => {
+      // this.success = data.success;
       if (data.success) {
         this.todaysTask = data.todaysTask;
         this.latestTask = data.latestTask;
@@ -31,6 +33,11 @@ export class TasksListComponent implements OnInit {
         this.errorMsg = data.msg;
       }
     });
+
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }

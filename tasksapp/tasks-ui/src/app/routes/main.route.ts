@@ -10,6 +10,7 @@ import { EditTaskComponent } from '../components/tasks/edit-task/edit-task.compo
 import { ProfileComponent } from '../components/profile/profile.component';
 import { ViewProfileComponent } from '../components/profile/view-profile/view-profile.component';
 import { EditProfileComponent } from '../components/profile/edit-profile/edit-profile.component';
+import { ViewTaskComponent } from '../components/tasks/view-task/view-task.component';
 
 import { AuthGuard } from './../guards/auth.guard';
 import { AnonymousGuard } from './../guards/anonymous.guard';
@@ -47,6 +48,11 @@ export const appRoutes: Routes = [
       {
         path: 'add',
         component: AddTaskComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'view/:id',
+        component: ViewTaskComponent,
         canActivate: [AuthGuard]
       },
       {

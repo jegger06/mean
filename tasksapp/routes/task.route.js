@@ -75,7 +75,7 @@ router.get('/all', passport.authenticate('jwt', { session: false }), (req, res, 
         .find({
           user: req.user.id,
           createdDate: {
-            $gte: beginOfDay,
+            // $gte: beginOfDay,
             $lt: endOfDay
           },
           done: false
