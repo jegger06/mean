@@ -12,7 +12,7 @@
           <a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" routerLink="/" href="#">Home</a>
         </li>
         <li *ngIf="authService.loggedIn()" class="nav-item">
-          <a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" routerLink="/task/all" href="#">Tasks List</a>
+          <a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" routerLink="/task/all/today" href="#">Tasks List</a>
         </li>
         <li *ngIf="authService.loggedIn()" class="nav-item">
           <a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" routerLink="/task/add" href="#">Add Task</a>

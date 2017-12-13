@@ -11,6 +11,10 @@ import { ProfileComponent } from '../components/profile/profile.component';
 import { ViewProfileComponent } from '../components/profile/view-profile/view-profile.component';
 import { EditProfileComponent } from '../components/profile/edit-profile/edit-profile.component';
 import { ViewTaskComponent } from '../components/tasks/view-task/view-task.component';
+import { TodayComponent } from '../components/tasks/tasks-list/today/today.component';
+import { LatestComponent } from '../components/tasks/tasks-list/latest/latest.component';
+import { OverdueComponent } from '../components/tasks/tasks-list/overdue/overdue.component';
+import { DoneComponent } from '../components/tasks/tasks-list/done/done.component';
 
 import { AuthGuard } from './../guards/auth.guard';
 import { AnonymousGuard } from './../guards/anonymous.guard';
@@ -43,7 +47,34 @@ export const appRoutes: Routes = [
       {
         path: 'all',
         component: TasksListComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
+        children: [
+          {
+            path: '',
+            redirectTo: 'today',
+            pathMatch: 'full'
+          },
+          {
+            path: 'today',
+            component: TodayComponent,
+            canActivate: [AuthGuard]
+          },
+          {
+            path: 'latest',
+            component: LatestComponent,
+            canActivate: [AuthGuard]
+          },
+          {
+            path: 'overdue',
+            component: OverdueComponent,
+            canActivate: [AuthGuard]
+          },
+          {
+            path: 'done',
+            component: DoneComponent,
+            canActivate: [AuthGuard]
+          }
+        ]
       },
       {
         path: 'add',

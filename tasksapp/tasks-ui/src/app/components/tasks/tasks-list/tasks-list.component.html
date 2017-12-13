@@ -1,5 +1,5 @@
 <h2 class="display-3 mb-4">Tasks Lists</h2>
-<div *ngIf="errorMsg != ''; else error">
+<!-- <div *ngIf="errorMsg != ''; else error">
   <ul class="nav nav-tabs justify-content-center mb-4" id="myTab" role="tablist">
     <li class="nav-item">
       <a class="nav-link active" id="todaysTask-tab" data-toggle="tab" href="#todaysTask" role="tab" aria-controls="todaysTask" aria-selected="true">Today's Task</a>
@@ -84,4 +84,27 @@
 
 <ng-template #error>
   <p class="text-center">{{ errorMsg }}</p>
-</ng-template>
+</ng-template> -->
+
+<div class="card">
+  <div class="card-header">
+      <ul class="nav nav-tabs nav-fill card-header-tabs">
+        <li class="nav-item">
+          <a class="nav-link" href="#" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/task/all/today">Today</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/task/all/latest">Latest</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/task/all/overdue">Overdue</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/task/all/done">Done</a>
+        </li>
+      </ul>
+  </div>
+  <div class="card-body">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+

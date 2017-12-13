@@ -21,6 +21,10 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { ViewProfileComponent } from './components/profile/view-profile/view-profile.component';
 import { EditProfileComponent } from './components/profile/edit-profile/edit-profile.component';
 import { ViewTaskComponent } from './components/tasks/view-task/view-task.component';
+import { TodayComponent } from './components/tasks/tasks-list/today/today.component';
+import { LatestComponent } from './components/tasks/tasks-list/latest/latest.component';
+import { OverdueComponent } from './components/tasks/tasks-list/overdue/overdue.component';
+import { DoneComponent } from './components/tasks/tasks-list/done/done.component';
 
 import { appRoutes } from './routes/main.route';
 
@@ -48,7 +52,11 @@ import { TaskService } from './services/task.service';
     ProfileComponent,
     ViewProfileComponent,
     EditProfileComponent,
-    ViewTaskComponent
+    ViewTaskComponent,
+    TodayComponent,
+    LatestComponent,
+    OverdueComponent,
+    DoneComponent
   ],
   imports: [
     BrowserModule,

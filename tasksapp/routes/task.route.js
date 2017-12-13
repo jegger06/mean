@@ -159,4 +159,36 @@ router.get('/all', passport.authenticate('jwt', { session: false }), (req, res, 
     
 });
 
+router.get('/today', passport.authenticate('jwt', { session: false }), (req, res) => {
+  Task.find({
+    user: req.user.id,
+    startDate: { $lte: Date.now() },
+    endDate: { $gte: Date.now() },
+    done: false
+  })
+  .limit(10)
+  .sort('-startDate')
+  .then((tasks) => {
+    if (tasks) {
+      res.json({
+        success: true,
+        msg: 'Here is the lists of today\'s tasks',
+        tasks: tasks
+      });
+    } else {
+      res.json({
+        success: false,
+        msg: 'Error in today\'s tasks. Please try again later.'
+      });
+    }
+  })
+  .catch((err) => {
+    res.json({
+      success: false,
+      msg: 'Error in retrieving today\'s tasks. Please try again later.'
+    });
+  });
+
+});
+
 module.exports = router;
