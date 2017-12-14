@@ -160,10 +160,15 @@ router.get('/all', passport.authenticate('jwt', { session: false }), (req, res, 
 });
 
 router.get('/today', passport.authenticate('jwt', { session: false }), (req, res) => {
+  const year = new Date().getFullYear();
+  const day = new Date().getDate();
+  const month = new Date().getMonth() + 1;
+  const date = new Date(`${year}-${month}-${day}`);
+
   Task.find({
     user: req.user.id,
-    startDate: { $lte: Date.now() },
-    endDate: { $gte: Date.now() },
+    startDate: { $lte: date },
+    endDate: { $gte: date },
     done: false
   })
   .limit(10)
@@ -189,6 +194,96 @@ router.get('/today', passport.authenticate('jwt', { session: false }), (req, res
     });
   });
 
+});
+
+router.get('/latest', passport.authenticate('jwt', { session: false }), (req, res) => {
+  Task.find({
+    user: req.user.id,
+    createdDate: { $lte: new Date() },
+    done: false
+  })
+  .limit(10)
+  .sort('-createdDate')
+  .then((tasks) => {
+    if (tasks) {
+      res.json({
+        success: true,
+        msg: 'Here is the lists of latest tasks',
+        tasks: tasks
+      });
+    } else {
+      res.json({
+        success: false,
+        msg: 'Error in latest tasks. Please try again later.'
+      });
+    }
+  })
+  .catch((err) => {
+    res.json({
+      success: false,
+      msg: 'Error in retrieving latest tasks. Please try again later.'
+    });
+  });
+});
+
+router.get('/overdue', passport.authenticate('jwt', { session: false }), (req, res) => {
+  const now = new Date();
+  Task.find({
+    user: req.user.id,
+    endDate: { $lte: new Date(Date.UTC(now.getFullYear(), now.getMonth(), (now.getDate() - 1), 23, 59, 59, 999)) },
+    done: false
+  })
+  .limit(10)
+  .sort('endDate')
+  .then((tasks) => {
+    if (tasks) {
+      res.json({
+        success: true,
+        msg: 'Here is the lists of overdue tasks',
+        tasks: tasks
+      });
+    } else {
+      res.json({
+        success: false,
+        msg: 'Error in overdue tasks. Please try again later.'
+      });
+    }
+  })
+  .catch((err) => {
+    res.json({
+      success: false,
+      msg: 'Error in retrieving overdue tasks. Please try again later.'
+    });
+  });
+});
+
+router.get('/done', passport.authenticate('jwt', { session: false }), (req, res) => {
+  Task.find({
+    user: req.user.id,
+    done: true
+  })
+  .limit(10)
+  .sort('-doneDate')
+  .then((tasks) => {
+    if (tasks) {
+      res.json({
+        success: true,
+        msg: 'Here is the lists of done tasks',
+        tasks: tasks
+      });
+    } else {
+      res.json({
+        success: false,
+        msg: 'Error in done tasks. Please try again later.'
+      });
+    }
+  })
+  .catch((err) => {
+    res.json({
+      success: false,
+      msg: 'Error in retrieving done tasks. Please try again later.'
+    });
+  });
 });
 
 module.exports = router;

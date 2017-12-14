@@ -21,6 +21,9 @@ mongoose.connect(keys.mongoURI, {
 }).then(() => console.log('Connected to MongoDB...'))
   .catch((err) => console.log('Connection Error: ', err));
 
+// Log all mongoose queries in server
+mongoose.set('debug', true);
+
 // Initialize app
 const app = express();
 

@@ -20,4 +20,16 @@ export class TaskService {
     return this.http.get<TaskSchema>('http://localhost:3000/api/task/today');
   }
 
+  getLatestTasks() {
+    return this.http.get<TaskSchema>('http://localhost:3000/api/task/latest');
+  }
+
+  getOverdueTasks() {
+    return this.http.get<TaskSchema>('http://localhost:3000/api/task/overdue');
+  }
+
+  getDoneTasks() {
+    return this.http.get<TaskSchema>('http://localhost:3000/api/task/done');
+  }
+
 }

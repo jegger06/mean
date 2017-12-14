@@ -1,3 +1,16 @@
-<p>
-  done works!
-</p>
+<div class="card mb-4">
+  <h3 class="card-header">Done Task</h3>
+  <ul *ngIf="tasks.length > 0; else noDoneTask" class="list-group list-group-flush">
+    <li *ngFor="let task of tasks" class="list-group-item d-block">
+      <a href="#" class="d-block text-dark" routerLink="/task/view/{{ task._id }}">{{ task.name }}</a>
+    </li>
+  </ul>
+  <ng-template #noDoneTask>
+    <div class="card-body">
+      <p *ngIf="errorMsg; else customMsg" class="font-weight-bold text-center">{{ errorMsg }}</p>
+      <ng-template #customMsg>
+        <p class="font-weight-bold text-center">No Done Task. Check Out <a href="" routerLink="/task/all/today">Today's Task</a> and <a href="" routerLink="/task/all/overdue">Overdue Task</a> and get to working.</p>
+      </ng-template>
+    </div>
+  </ng-template>
+</div>

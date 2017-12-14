@@ -1,7 +1,7 @@
 export interface TaskSchema {
   success: boolean;
   msg: string;
-  data?: {
+  tasks?: {
     id: string,
     name: string,
     startDate: Date,
