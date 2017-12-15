@@ -9,6 +9,7 @@ export interface TaskSchema {
     details: string,
     user: string,
     done: boolean,
+    doneDate?: Date,
     createdDate: Date
   };
 }

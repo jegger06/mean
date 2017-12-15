@@ -32,4 +32,8 @@ export class TaskService {
     return this.http.get<TaskSchema>('http://localhost:3000/api/task/done');
   }
 
+  getTask(id: string | number) {
+    return this.http.get<TaskSchema>(`http://localhost:3000/api/task/details/${id}`);
+  }
+
 }

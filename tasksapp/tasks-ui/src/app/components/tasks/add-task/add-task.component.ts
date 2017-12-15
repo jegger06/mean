@@ -57,7 +57,7 @@ export class AddTaskComponent implements OnInit {
       };
       this.taskService.addTask(task).subscribe((data) => {
         if (data.success) {
-          console.log(data.data);
+          console.log(data.tasks);
           this.toastr.success(data.msg, 'Success!');
           this.router.navigate(['/task/all']);
         } else {

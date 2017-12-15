@@ -1,38 +1,38 @@
 <h2 class="display-3 mb-4">Task Details</h2>
 <!-- d-flex justify-content-between align-items-center -->
 <div class="card">
-  <div class="card-header d-flex justify-content-between align-items-center">
-    <h4 class="card-title">Sample Task here...</h4>
+  <div class="card-header d-flex justify-content-between align-items-center" [ngClass]="color">
+    <h4 class="card-title">{{ task.name }}</h4>
     <div class="actions">
       <i *ngIf="task.done; else notDone" class="fa fa-check-circle-o text-dark" aria-hidden="true" title="Task Done"></i>
       <ng-template #notDone>
         <i class="fa fa-times-circle-o text-dark" aria-hidden="true" title="Task Not Yet Done"></i>
       </ng-template>
-      <a href="#" class="text-dark" title="Edit Task?" routerLink="/task/edit/{{ '123' }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-      <a href="#" class="text-dark" title="Delete Task?" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+      <a href="#" class="text-dark" title="Edit Task?" routerLink="/task/edit/{{ task._id }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+      <a class="text-dark" title="Delete Task?" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
     </div>
   </div>
   <div class="card-body">
     <div class="row">
       <div class="col-7">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis cum maiores alias hic earum repudiandae saepe esse eius quidem molestiae.</p>
+        <p>{{ task.details }}</p>
       </div>
       <div class="col-5">
         <ul class="list-group">
           <li class="list-group-item">
-            Start Date: <strong>{{ '2017-12-07T02:53:57.982Z' | date:'fullDate' }}</strong>
+            Start Date: <strong>{{ task.startDate | date:'fullDate' }}</strong>
           </li>
           <li class="list-group-item">
             End Date:
-            <strong>{{ '2017-12-08T02:53:57.982Z' | date:'fullDate' }}</strong>
+            <strong>{{ task.endDate | date:'fullDate' }}</strong>
           </li>
           <li class="list-group-item">
             Created Date:
-            <strong>{{ '2017-12-06T02:53:57.982Z' | date:'fullDate' }}</strong>
+            <strong>{{ task.createdDate | date:'fullDate' }}</strong>
           </li>
           <li *ngIf="task.done" class="list-group-item">
             Done Date:
-            <strong>{{ '2017-12-08T02:53:57.982Z' | date:'fullDate' }}</strong>
+            <strong>{{ task.doneDate | date:'fullDate' }}</strong>
           </li>
         </ul>
       </div>
