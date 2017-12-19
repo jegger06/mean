@@ -4,9 +4,9 @@
   <div class="card-header d-flex justify-content-between align-items-center" [ngClass]="color">
     <h4 class="card-title">{{ task.name }}</h4>
     <div class="actions">
-      <i *ngIf="task.done; else notDone" class="fa fa-check-circle-o text-dark" aria-hidden="true" title="Task Done"></i>
+      <span *ngIf="task.done; else notDone" class="badge badge-info">Done</span>
       <ng-template #notDone>
-        <i class="fa fa-times-circle-o text-dark" aria-hidden="true" title="Task Not Yet Done"></i>
+        <span class="badge badge-warning">Not Done</span>
       </ng-template>
       <a href="#" class="text-dark" title="Edit Task?" routerLink="/task/edit/{{ task._id }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
       <a class="text-dark" title="Delete Task?" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
@@ -55,7 +55,7 @@
         Are you sure you really wan't to delete this task?
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" (click)="delete()">Yes</button>
+        <button type="button" class="btn btn-danger" (click)="deleteTask(task._id)" data-dismiss="modal">Yes</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
       </div>
     </div>

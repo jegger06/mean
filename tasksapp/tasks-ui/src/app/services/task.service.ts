@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Task } from './../models/task';
+import { Task, TaskDelete } from './../models/task';
 import { TaskSchema } from './../models/task.response';
 
 @Injectable()
@@ -34,6 +34,10 @@ export class TaskService {
 
   getTask(id: string | number) {
     return this.http.get<TaskSchema>(`http://localhost:3000/api/task/details/${id}`);
+  }
+
+  deleteTask(id: string | number) {
+    return this.http.delete<TaskDelete>(`http://localhost:3000/api/task/${ id }`);
   }
 
 }

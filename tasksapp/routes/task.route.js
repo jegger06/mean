@@ -289,8 +289,8 @@ router.get('/done', passport.authenticate('jwt', { session: false }), (req, res)
 router.get('/details/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
   Task.findOne({ _id: req.params.id })
     .then((task) => {
-      console.log(task);
-      console.log('User ID: ', req.user.id);
+      // console.log(task);
+      // console.log('User ID: ', req.user.id);
       if (task.user != req.user.id) {
         res.json({
           success: false,
@@ -308,6 +308,38 @@ router.get('/details/:id', passport.authenticate('jwt', { session: false }), (re
       res.json({
         success: false,
         msg: 'Invalid Task ID. Please do not change the URL parameters.'
+      });
+    });
+});
+
+router.delete('/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+  Task.findOne({ _id: req.params.id })
+    .then((task) => {
+      if (task.user != req.user.id) {
+        res.json({
+          success: false,
+          msg: 'You are not authorized to delete this task. You are not the owner of it.'
+        });
+      } else {
+        Task.remove({ _id: req.params.id })
+          .then(() => {
+            res.json({
+              success: true,
+              msg: 'Task has been deleted.'
+            });
+          })
+          .catch((err) => {
+            res.json({
+              success: false,
+              msg: 'Error on removing the task! Please try again.'
+            });
+          });
+      }
+    })
+    .catch((err) => {
+      res.json({
+        success: false,
+        msg: 'No task found with the current task ID you provided.'
       });
     });
 });

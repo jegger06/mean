@@ -51,8 +51,15 @@ export class ViewTaskComponent implements OnInit, OnDestroy {
     });
   }
 
-  delete() {
-    alert(123);
+  deleteTask(id: string | number) {
+    this.taskService.deleteTask(id).subscribe((res) => {
+      if (res.success) {
+        this.toastr.success(res.msg, 'Yay!', { toastLife: 5000 });
+        this.router.navigate(['/task/all/today']);
+      } else {
+        this.toastr.warning(res.msg, 'Opps!', { toastLife: 5000 });
+      }
+    })
   }
 
   ngOnDestroy() {

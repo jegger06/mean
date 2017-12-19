@@ -16,3 +16,8 @@ export interface TaskList {
   done: boolean;
   doneDate?: string;
 }
+
+export interface TaskDelete {
+  success: boolean;
+  msg: string;
+}
