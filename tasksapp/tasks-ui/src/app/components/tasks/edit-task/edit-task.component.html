@@ -1,3 +1,56 @@
-<p>
-  edit-task works!
-</p>
+<h2 class="display-3 mb-4">Edit Task</h2>
+<form #taskForm="ngForm" (ngSubmit)="editTask(taskForm)">
+
+  <div class="form-group">
+    <label for="task">Tasks Name</label>
+    <input [(ngModel)]="task.name" type="text" name="name" id="tasks" class="form-control" minlength="3" placeholder="Task name..." #nameField="ngModel" [ngClass]="{'is-invalid' : nameField.invalid && (nameField.dirty || nameField.touched)}" required>
+
+    <div *ngIf="nameField.invalid && (nameField.dirty || nameField.touched)" class="invalid-feedback">
+      <div *ngIf="nameField.errors.required">
+        Task Name is required.
+      </div>
+      <div *ngIf="nameField.errors.minlength">
+        Task name must be atleast {{ nameField.errors.minlength.requiredLength }} characters long.
+      </div>
+    </div>
+
+  </div>
+
+  <div class="form-group" daterangepicker [options]="options" (selected)="selectedDate($event, daterange)">
+    <label for="daterange">Task Date</label>
+    <input type="text" placeholder="Task Dates" class="form-control" [(ngModel)]="dateSelected" name="dateSelected" #dateSelectedField="ngModel" [ngClass]="{'is-invalid' : dateSelectedField.invalid && (dateSelectedField.dirty || dateSelectedField.touched)}" [readonly]="taskDate" required>
+
+    <div *ngIf="dateSelectedField.invalid && (dateSelectedField.dirty || dateSelectedField.touched)" class="invalid-feedback">
+      <div *ngIf="dateSelectedField.errors.required">
+        Task Date is required
+      </div>
+    </div>
+
+
+    <!-- <input type="text" name="daterangeInput" daterangepicker [options]="options" (selected)="selectedDate($event, daterange)" class="form-control" /> -->
+
+
+
+  </div>
+
+  <div class="form-group">
+    <label for="details">Details</label>
+    <textarea [(ngModel)]="task.details" name="details" id="details" cols="4" rows="5" class="form-control" #detailsField="ngModel" [ngClass]="{'is-invalid' : detailsField.invalid && (detailsField.dirty || detailsField.touched)}" required></textarea>
+
+    <div *ngIf="detailsField.invalid && (detailsField.dirty || detailsField.touched)" class="invalid-feedback">
+      <div *ngIf="detailsField.errors.required">
+        Task Details is required
+      </div>
+    </div>
+
+  </div>
+
+  <div class="form-check">
+    <label class="form-check-label">
+      <input type="checkbox" [(ngModel)]="task.done" name="doneStatus" id="done" class="form-check-input" #doneField="ngModel">
+      Task Done?
+    </label>
+  </div>
+
+  <button [disabled]="!taskForm.form.valid" type="submit" class="btn btn-primary">Submit</button>
+</form>

@@ -59,7 +59,7 @@ export class ViewTaskComponent implements OnInit, OnDestroy {
       } else {
         this.toastr.warning(res.msg, 'Opps!', { toastLife: 5000 });
       }
-    })
+    });
   }
 
   ngOnDestroy() {
